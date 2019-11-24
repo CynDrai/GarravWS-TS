@@ -5,10 +5,10 @@ import express, {Express} from "express";
 const app: Express = express();
 
 // Import de Rotas
-import testeRoute from "./TesteRoute";
+import userRoute from "./UserRoute";
 
 // Uso de Rotas
-app.use("/teste", testeRoute);
+app.use("/user", userRoute);
 
 // Habilita o CORS
 app.use(cors());
