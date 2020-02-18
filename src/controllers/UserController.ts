@@ -10,7 +10,8 @@ export async function getJsonLogin(req: Request, res: Response) {
   const entityManager: Repository<User> = getRepository(User);
   // Find User by Email
   const user: User = await entityManager.findOne({email: req.params.email});
-
+  user.date_account = new Date(user.date_account);
+  
   res.status(200).send(user).end();
   } catch (e) {
     // tslint:disable-next-line:no-console
@@ -31,7 +32,7 @@ export async function postJsonLogin(req: Request, res: Response) {
     // Find User by Email
     const userSearch: User = await entityManager.findOne({email: user.email});
     if (!userSearch) {
-      entityManager.save(user);
+      await entityManager.save(user);
       res.status(200).send("Sucess").end();
     } else {
       res.status(200).send(null).end();
